@@ -4,3 +4,7 @@ Repository for testing my Git/GitHub setup
 
 # Add content from PC
 "Another line, now from PC"
+
+
+# Add third line from PC
+"Adding a third line"
