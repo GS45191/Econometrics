@@ -1,0 +1,26 @@
+---
+title: "Maternal mortality ratios using World Bank open data"
+author: "Desa Berisha"
+date: "19.2.2022"
+output:
+  html_document:
+    toc: true
+    number_sections: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+setwd(getwd())
+library(WDI)
+library(tidyverse)
+library(plotly)
+```
+
+<style type="text/css">
+h1 {color: #1a2451}
+h2 {color: #ffbd4a}
+h3 {color: #1a2451}
+</style>
+
+![](KRG elegant logo for light BG.png)
