@@ -56,7 +56,7 @@ WDI(country = c("US",
                 "ZA"),
     indicator = "SH.STA.MMRT",
     start = 2005,
-    end = 2015,
+    end = 2018,
     extra = FALSE))
 ```
 
@@ -72,7 +72,7 @@ The full list of variables is shown below.
 names(WDI(country = "US",
           indicator = "SH.STA.MMRT",
           start = 2015,
-          end = 2016,
+          end = 2018,
           extra = TRUE))
 ```
 
