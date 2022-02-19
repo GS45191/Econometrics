@@ -23,7 +23,7 @@ h2 {color: #ffbd4a}
 h3 {color: #1a2451}
 </style>
 
-![](KRG elegant logo for light BG.png)
+![](world-bank-logo.png)
 
 ## Introduction
 
