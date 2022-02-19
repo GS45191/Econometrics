@@ -122,5 +122,3 @@ p1
 ## Conclusion
 
 The WDI library is extremely easy to use, yet powerful enough to bring a massive open data resource to you desktop.  Learn more about it at: https://cran.r-project.org/web/packages/WDI/WDI.pdf 
-
-If you would like to know more about maternal mortality rates in South Africa, you can view this issue of the South African Medical Journal: http://www.samj.org.za/index.php/samj/issue/view/215/showToc 
