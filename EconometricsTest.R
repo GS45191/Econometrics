@@ -1,2 +1,2 @@
-# Econometrics example
+# Example
 rnorm(100)
