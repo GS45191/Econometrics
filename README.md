@@ -1,2 +1,2 @@
 # Econometrics
-Repository for my Eonometrics tests
+Repository for my Econometrics tests
