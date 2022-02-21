@@ -1,0 +1,73 @@
+---
+title: "WDI: Prices-Analysis"
+author: "Desa Berisha"
+date: "19.2.2022"
+output:
+  html_document:
+    toc: true
+    number_sections: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+setwd(getwd())
+library(WDI)
+library(tidyverse)
+library(plotly)
+```
+
+<style type="text/css">
+h1 {color: #1a2451}
+h2 {color: #ffbd4a}
+h3 {color: #1a2451}
+</style>
+
+
+![](world-bank-logo.png)
+
+```{r}
+WDIsearch(string = "Inflation, consumer prices ",
+          field = "name",
+          short = FALSE)
+```
+
+```{r data}
+
+countries <- c("US", "GB", "DE", "FR", "IT", "EU")
+
+df <- 
+  data.frame(
+    WDI(country = countries,
+        indicator = "FP.CPI.TOTL.ZG",
+        start = 2005,
+        end = 2018,
+        extra = FALSE)) %>% 
+  dplyr::rename(cpi = FP.CPI.TOTL.ZG)
+```
+
+
+```{r table}
+cpi_table <-
+  df %>% 
+  group_by(year, country) %>% 
+  arrange(by_group = year) %>% 
+  pivot_wider(names_from = year,
+              values_from = cpi,
+              values_fn = ~sum(.x, na.rm = TRUE))
+
+```
+
+```{r plot}
+cpi_plot <-
+  df %>% 
+  ggplot(aes(x = year, 
+             y = cpi, 
+             color = country)) +
+  geom_point() +
+  geom_line() +
+  theme_minimal()
+
+cpi_plot 
+    
+```
