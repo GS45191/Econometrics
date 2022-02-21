@@ -34,11 +34,11 @@ WDIsearch(string = "Inflation, consumer prices ",
 
 ```{r data}
 
-countries <- c("US", "GB", "DE", "FR", "IT", "EU")
+#countries <- c("US", "GB", "DE", "FR", "IT", "EU")
 
 df <- 
   data.frame(
-    WDI(country = countries,
+    WDI(country = countrycode::codelist$iso2c,
         indicator = "FP.CPI.TOTL.ZG",
         start = 2005,
         end = 2018,
@@ -60,7 +60,8 @@ cpi_table <-
 
 ```{r plot}
 cpi_plot <-
-  df %>% 
+  df %>%
+  filter(country %in% sample(countrycode::codelist$country.name.en, 10)) %>% 
   ggplot(aes(x = year, 
              y = cpi, 
              color = country)) +
