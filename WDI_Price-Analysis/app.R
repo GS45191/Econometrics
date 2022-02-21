@@ -18,21 +18,10 @@ ui <- fluidPage(
     # Application title
     titlePanel("WDI: Prices-Analysis"),
 
-    # Sidebar with a slider input for number of bins 
-    sidebarLayout(
-        sidebarPanel(
-            # sliderInput("year",
-            #             "Choose a year:",
-            #             min = min(df$year),
-            #             max = max(df$year),
-            #             value = 2018,
-            #             step = 1,
-            #             dragRange = TRUE)
-            
         selectInput(
             inputId = "country",
             label = "Choose country:",
-            choices = df$country,
+            choices = countrycode::codelist$country.name.en,
             multiple = TRUE
         ),
             
@@ -48,19 +37,18 @@ ui <- fluidPage(
             label = "Choose ending year:",
             choices = min(df$year):max(df$year),
             selected = max(df$year)
-        )
-            
         ),
 
         # Show a plot of the generated distribution
         mainPanel(
-           plotOutput("cpi_plot")
+           plotOutput("cpi_plot"),
+           tableOutput("cpi_table")
         )
-    )
 )
 
 # Define server logic required to draw a histogram
 server <- function(input, output) {
+    
 
     output$cpi_plot <- renderPlot({
         # draw the histogram with the specified number of bins
@@ -72,7 +60,24 @@ server <- function(input, output) {
                        color = country)) +
             geom_point() +
             geom_line() +
+            scale_x_continuous(breaks=seq(input$startyear, input$endyear, by = 1)) +
+            scale_y_continuous(name = "Inflation, consumer prices (annual %)", 
+                               labels = scales::comma) +
             theme_minimal()
+    })
+    
+    output$cpi_table <- renderTable({
+        
+        # Table
+            df %>% 
+            filter(year > input$startyear & year < input$endyear,
+                   country %in% input$country) %>% 
+            select(-iso2c) %>% 
+            group_by(year, country) %>% 
+            arrange(by_group = year) %>% 
+            pivot_wider(names_from = year,
+                        values_from = cpi,
+                        values_fn = ~sum(.x, na.rm = TRUE))
     })
 }
 
