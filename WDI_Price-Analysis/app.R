@@ -38,7 +38,7 @@ ui <- fluidPage(
             
         selectInput(
             inputId = "startyear",
-            label = "Choose startin year:",
+            label = "Choose starting year:",
             choices = min(df$year):max(df$year),
             selected = min(df$year)
         ),
