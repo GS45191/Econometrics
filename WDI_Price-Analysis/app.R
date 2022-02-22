@@ -16,7 +16,10 @@ library(plotly)
 ui <- fluidPage(
 
     # Application title
-    titlePanel("WDI: Prices-Analysis"),
+    titlePanel("WDI: Inflation Analysis"),
+    
+    sidebarLayout(
+        sidebarPanel(
 
         selectInput(
             inputId = "country",
@@ -37,13 +40,14 @@ ui <- fluidPage(
             label = "Choose ending year:",
             choices = min(df$year):max(df$year),
             selected = max(df$year)
-        ),
+        )),
 
         # Show a plot of the generated distribution
         mainPanel(
            plotOutput("cpi_plot"),
            tableOutput("cpi_table")
         )
+    )
 )
 
 # Define server logic required to draw a histogram
@@ -60,7 +64,9 @@ server <- function(input, output) {
                        color = country)) +
             geom_point() +
             geom_line() +
-            scale_x_continuous(breaks=seq(input$startyear, input$endyear, by = 1)) +
+            scale_x_continuous(breaks = seq(input$startyear, 
+                                            input$endyear, 
+                                            by = 1)) +
             scale_y_continuous(name = "Inflation, consumer prices (annual %)", 
                                labels = scales::comma) +
             theme_minimal()
