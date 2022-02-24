@@ -12,6 +12,8 @@ library(WDI)
 library(tidyverse)
 library(plotly)
 
+# First, load df in WDI_FP.CPI
+
 # Define UI for application that draws a histogram
 ui <- fluidPage(
 
